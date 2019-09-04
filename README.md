@@ -8,10 +8,13 @@ created by Piotr Czapla. Therefore to run the noteboook, please clone the
 [ulmfit-multilingual](https://github.com/n-waves/ulmfit-multilingual) repository, and make a softlink
 from ulmfit directory of ulmfit-multilingual to the current directory:
 
-`
+```
 $ git clone git@github.com:cahya-wirawan/FastAI-Course.git
 $ git clone https://github.com/n-waves/ulmfit-multilingual.git
 $ cd FastAI-Course
 $ ln -s ../ulmfit-multilingual/ulmfit
-`
-
+```
+### Requirements
+- python >= 3.6
+- pytorch >= 1.0
+- fastai >= 1.0.52
