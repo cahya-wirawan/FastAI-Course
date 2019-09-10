@@ -1,3 +1,6 @@
+import os, sys
+sys.path.append(os.path.realpath('ulmfit-multilingual'))
+
 import pandas as pd
 import spacy
 import fastai
@@ -17,30 +20,28 @@ print(spacy.__version__)
 
 LANG = 'id'
 path = Path('/mnt/mldata/data/LM/ulmfit/wiki/id-2')
-MODEL_NAME = "vf30k"
+MODEL_NAME = "f60k"
 path.ls()
 
-
-model_path = Path('/mnt/mldata/data/LM/ulmfit/wiki/id-2/models/vf30k/lstm_orig.m')
-#model_path = Path('/mnt/mldata/data/LM/ulmfit/tmp/models/vf30k/lstm_orig.m')
+model_path = Path(path/f'models/{MODEL_NAME}/lstm_orig.m')
 dataset_path = Path('/mnt/mldata/data/LM/ulmfit/tmp/id-2')
 
-#learn = load_learner('/mnt/mldata/data/LM/ulmfit/tmp/id-2/models/vf30k/lstm_orig.m', file='cls_best.pth')
+#learn = load_learner(f'/mnt/mldata/data/LM/ulmfit/tmp/id-2/models/{MODEL_NAME}/lstm_orig.m', file='cls_best.pth')
 #print(learn)
 
 uf = ULMFiT()
-#uf_cls = uf.cls(dataset_path=dataset_path, base_lm_path=model_path,
-#                lang=f'{LANG}', name='orig')
+#uf_cls = uf.cls(dataset_path=dataset_path, base_lm_path=model_path, lang=f'{LANG}', name='orig')
 
-l_cls = uf.load_cls(dataset_path/'models/vf30k/lstm_orig.m')
+l_cls = uf.load_cls(dataset_path/f'models/{MODEL_NAME}/lstm_orig.m')
 # data_cls, _, _ = l_cls.load_cls_data(40)
-data_cls = DataBunch.load_empty('/mnt/mldata/data/LM/ulmfit/tmp/id-2/models/vf30k', 'empty.pkl')
+#data_cls = DataBunch.load_empty(f'/mnt/mldata/data/LM/ulmfit/tmp/id-2/models/{MODEL_NAME}', 'empty.pkl')
+data_cls = DataBunch.load_empty(f'/mnt/mldata/data/LM/ulmfit/tmp/id-2/models/{MODEL_NAME}')
 learn = l_cls.create_cls_learner(data_cls)
 print("uf:", uf)
 #print("uf_cls:", uf_cls)
 print("learn:", learn)
 
-"""
+
 data_lm = DataBunch.load_empty(path/f'models/{MODEL_NAME}')
 print(data_lm.vocab.itos[:20])
 data_lm.path = path
@@ -54,4 +55,3 @@ print("Begin")
 data_clas = data_clas.label_from_df(cols='target1')
 print("End: ", data_clas)
 print("data_clas: ", data_clas.train[0])
-"""
