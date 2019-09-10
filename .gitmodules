@@ -1,0 +1,3 @@
+[submodule "ulmfit-multilingual"]
+	path = ulmfit-multilingual
+	url = https://github.com/n-waves/ulmfit-multilingual.git
